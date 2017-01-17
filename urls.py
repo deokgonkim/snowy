@@ -25,34 +25,34 @@ admin.autodiscover()
 handler500 = 'snowy.views.server_error'
 
 urlpatterns = patterns('',
-    url(r'^$', direct_to_template, {'template': 'index.html'},
+    url(r'^notes/$', direct_to_template, {'template': 'index.html'},
         name='snowy_index'),
 
-    (r'^api/', include('snowy.api.urls')),
-    (r'^accounts/', include('snowy.accounts.urls')),
-    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^admin/', include(admin.site.urls)),
+    (r'^notes/api/', include('snowy.api.urls')),
+    (r'^notes/accounts/', include('snowy.accounts.urls')),
+    (r'^notes/admin/doc/', include('django.contrib.admindocs.urls')),
+    (r'^notes/admin/', include(admin.site.urls)),
 
-    (r'^export/', include('snowy.export.urls')),
+    (r'^notes/export/', include('snowy.export.urls')),
 
-    (r'^mobile/', include('snowy.mobile_notes.urls')),
+    (r'^notes/mobile/', include('snowy.mobile_notes.urls')),
 
-    url(r'^(?P<username>\w+)/$', 'snowy.views.user_index', name="user_index"),
-    (r'^(?P<username>\w+)/notes/', include('snowy.notes.urls')),
+    url(r'^notes/(?P<username>\w+)/$', 'snowy.views.user_index', name="user_index"),
+    (r'^notes/(?P<username>\w+)/notes/', include('snowy.notes.urls')),
 )
 
 from django.conf import settings
 
 if settings.DEBUG:
     urlpatterns += patterns('',
-        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {
+        (r'^notes/site_media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,
             'show_indexes': True
         }))
 
 # OAuth
 urlpatterns += patterns('piston.authentication',
-    url(r'^oauth/request_token/$', 'oauth_request_token', name='oauth_request_token'),
-    url(r'^oauth/authenticate/$', 'oauth_user_auth', name='oauth_user_auth'),
-    url(r'^oauth/access_token/$', 'oauth_access_token', name='oauth_access_token'),
+    url(r'^notes/oauth/request_token/$', 'oauth_request_token', name='oauth_request_token'),
+    url(r'^notes/oauth/authenticate/$', 'oauth_user_auth', name='oauth_user_auth'),
+    url(r'^notes/oauth/access_token/$', 'oauth_access_token', name='oauth_access_token'),
 )

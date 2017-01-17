@@ -16,6 +16,8 @@ from authentication import NoAuthentication
 from utils import coerce_put_post, FormValidationError, HttpStatusCode
 from utils import rc, format_error, translate_mime, MimerDataException
 
+import traceback
+
 CHALLENGE = object()
 
 class Resource(object):
@@ -164,6 +166,7 @@ class Resource(object):
         try:
             result = meth(request, *args, **kwargs)
         except Exception, e:
+            traceback.print_exc()
             result = self.error_handler(e, request, meth)
 
 
