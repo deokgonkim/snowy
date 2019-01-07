@@ -110,24 +110,23 @@ TEMPLATE_DIRS = [
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_ROOT, "templates"),
+    os.path.join(PROJECT_ROOT, '..', "templates"),
 ]
 
 # Add the lib/ directory to the path for external apps
-EXTERNAL_APPS_PATH = os.path.join(PROJECT_ROOT, "lib")
+EXTERNAL_APPS_PATH = os.path.join(PROJECT_ROOT, '..', "lib")
 
 import sys
 sys.path.insert(0, EXTERNAL_APPS_PATH)
 
 INSTALLED_APPS = [
     # Local apps
-    'core',
-    'api',
-    'accounts',
-    'django_openid_auth',
-    'notes',
-    'mobile_notes',
-    'export',
+    'snowy.api',
+    'snowy.accounts',
+    'snowy.core',
+    'snowy.export',
+    'snowy.mobile_notes',
+    'snowy.notes',
 
     # System apps
     'django.contrib.admin',
@@ -140,6 +139,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
 
     # External apps
+    #'django_openid_auth',
     'registration',
     'south',
     #'reversion',
@@ -171,7 +171,7 @@ AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
-local_settings = os.path.join(PROJECT_ROOT, 'local_settings.py')
+local_settings = os.path.join(PROJECT_ROOT, '..', 'local_settings.py')
 if os.path.isfile(local_settings):
     try:
         execfile(local_settings)
